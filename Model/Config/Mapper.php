@@ -52,9 +52,10 @@ class Mapper
                 $providerData['parameters'] = !empty($providerData['parameters'])
                     ? reset($providerData['parameters'])
                     : [];
-                array_walk($providerData['parameters'], function (&$array) {
-                    $array = reset($array);
-                });
+                $providerData['parameters'] = array_map(
+                    'reset',
+                    $providerData['parameters']
+                );
                 $providers[$providerType] = $providerData;
             }
             $files[$fileData['name']] = $fileData;
